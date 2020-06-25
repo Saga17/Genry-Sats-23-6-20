@@ -37,7 +37,7 @@ class CreateMessage extends Component {
           [flag ? 'recepient': target.name]: flag ? flag.email : target.value
         }, () => {
             if(target.name === 'recepient' && this.state.recepient.length > 3) {
-                axios.post('http://localhost:8000/search/', {email: this.state.recepient}, { headers: {'Authorization': this.props.access_token }}).then((ans) => {
+                axios.post(`${this.props.url}/search/`, {email: this.state.recepient}, { headers: {'Authorization': this.props.access_token }}).then((ans) => {
                     if(ans.data.success){
                         this.setState(state => ({
                             suggestions: ans.data.suggestions
@@ -57,7 +57,7 @@ class CreateMessage extends Component {
         const data = {recepient: this.state.recepient, subject: this.state.subject, msg: this.state.msg};
 
         validateAll(data, rules).then(() => {        
-            axios.post('http://localhost:8000/sendmessage/', { receiver: this.state.recepient, subject: this.state.subject, message: this.state.msg}, { headers: {'Authorization': this.props.access_token }}).then(response => {
+            axios.post(`${this.props.url}/sendmessage/`, { receiver: this.state.recepient, subject: this.state.subject, message: this.state.msg}, { headers: {'Authorization': this.props.access_token }}).then(response => {
                 
             if(!response.data.success)
               {
@@ -76,7 +76,6 @@ class CreateMessage extends Component {
               this.props.close();
             });
           }).catch((errors) => {
-              console.log(errors);
               let errorsFormatted = {};
   
               errors.forEach(err => {
@@ -88,7 +87,6 @@ class CreateMessage extends Component {
     }
 
     render() {
-        
         return (
             <div className='wrapper'>
                 <DialogTitle id="form-dialog-title">Send a new message</DialogTitle>
@@ -156,6 +154,7 @@ class CreateMessage extends Component {
 };
 
 const mapStateToProps = state => ({
-    access_token: state.access_token
+    access_token: state.access_token,
+    url: state.url
 });
 export default connect(mapStateToProps)(CreateMessage);

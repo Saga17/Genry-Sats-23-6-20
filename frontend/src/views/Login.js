@@ -68,7 +68,7 @@ class Login extends Component {
         };
 
         validateAll(data, rules).then(() => {        
-          axios.post('http://127.0.0.1:8000/login/', { email: this.state.email, password: this.state.password}).then(response => {
+          axios.post(`${this.props.url}/login/`, { email: this.state.email, password: this.state.password}).then(response => {
             if(!response.data.success)
             {
               NotificationManager.error(response.data.message);
@@ -79,7 +79,6 @@ class Login extends Component {
             NotificationManager.success('Successfully logged in');
           });
         }).catch((errors) => {
-            console.log(errors);
             let errorsFormatted = {};
 
             errors.forEach(err => {
@@ -172,7 +171,8 @@ Login.propTypes = {
   };
 
 const mapStateToProps = state => ({
-  access_token: state.access_token
+  access_token: state.access_token,
+  url: state.url
 });
 
 

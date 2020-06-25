@@ -7,22 +7,21 @@ import * as serviceWorker from './serviceWorker';
 import { createStore } from "redux";
 import { Provider } from 'react-redux';
 
-const store = createStore((state = { access_token: localStorage.getItem('access_token') ? localStorage.getItem('access_token') : '' }, action) => {
+const store = createStore((state = { url: 'http://127.0.0.1:8000', access_token: localStorage.getItem('access_token') ? localStorage.getItem('access_token') : '' }, action) => {
   switch(action.type) {
     case 'updateAccessToken':
       localStorage.setItem('access_token', action.access_token);
-      return { access_token: action.access_token };
+      return { access_token: action.access_token, url: state.url };
     default:
       return state;
   }
 });
 
 ReactDOM.render(
-  <React.StrictMode>
     <Provider store={store}>
       <App />
     </Provider>
-  </React.StrictMode>,
+  ,
   document.getElementById('root')
 );
 

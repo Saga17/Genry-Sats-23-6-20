@@ -53,7 +53,7 @@ class Inbox extends Component {
     }
     
     getMessages = () => {
-        axios.get(`http://localhost:8000/messages/${this.state.sent ? 'sent' : 'received'}`, { headers: {'Authorization': this.props.access_token }}).then((response) => {
+        axios.get(`${this.props.url}/messages/${this.state.sent ? 'sent' : 'received'}`, { headers: {'Authorization': this.props.access_token }}).then((response) => {
             let ans = response.data;
             let messages = [];
 
@@ -84,18 +84,14 @@ class Inbox extends Component {
     };
 
     handleClick = (msg) => {
-        console.log(msg);
         this.setState(state => ({
             currMsg: msg
         }));
     }
 
     deleteMsg = (msg) => {
-        console.log('deleting..');
-        //console.log(msg);
-        axios.get(`http://localhost:8000/message/delete/${msg.id}`, { headers: {'Authorization': this.props.access_token }}).then(res => {
+        axios.get(`${this.props.url}/message/delete/${msg.id}`, { headers: {'Authorization': this.props.access_token }}).then(res => {
             let ans = res.data;
-            console.log(ans);
             if(ans.success) {
                 NotificationManager.success(ans.message);
                 this.setState(state => ({
@@ -185,7 +181,8 @@ class Inbox extends Component {
     }
 };
 const mapStateToProps = state => ({
-    access_token: state.access_token
+    access_token: state.access_token,
+    url: state.url
 });
 
 export default connect(mapStateToProps)(Inbox);

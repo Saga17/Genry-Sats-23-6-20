@@ -79,8 +79,7 @@ class Register extends Component {
         };
 
         validateAll(data, rules).then(() => {        
-          axios.post('http://127.0.0.1:8000/register/', { email: this.state.email, password: this.state.password, username: this.state.username}).then(response => {
-            console.log(response.data);
+          axios.post(`${this.props.url}/register/`, { email: this.state.email, password: this.state.password, username: this.state.username}).then(response => {
             if(!response.data.success)
             {
               NotificationManager.error(response.data.message);
@@ -91,7 +90,6 @@ class Register extends Component {
             NotificationManager.success('Successfully registered ');
           });
         }).catch((errors) => {
-            console.log(errors);
             let errorsFormatted = {};
 
             errors.forEach(err => {
@@ -209,7 +207,8 @@ Register.propTypes = {
   };
 
 const mapStateToProps = state => ({
-  access_token: state.access_token
+  access_token: state.access_token,
+  url: state.url
 });
 
 export default connect(mapStateToProps)(withStyles(styles)(Register));
