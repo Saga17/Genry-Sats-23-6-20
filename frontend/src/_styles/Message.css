@@ -1,0 +1,63 @@
+.message-container {
+    float: left;
+    margin-top: 30px;
+    width: 95%;
+    height: 500px;
+}
+
+.message-header {
+    width: 100%;
+    padding-top: 10px;
+    height: 100px;
+    border-top: solid #c4c1ec 1px;
+    border-bottom: solid #c4c1ec 1px;
+}
+
+.avatarBigger {
+    width: 50px !important;
+    height: 50px !important;
+    font-size: 1.65rem !important;
+    padding-left:1px;
+    margin-top:-5px;
+    margin-right: 20px;
+    background-color: #c4c1ec !important;
+}
+.msg-item-text {
+    font-weight: bold !important;
+}
+.message-desc {
+    float:left;
+    width: 320px !important;
+    border-right: solid #c4c1ec 2px;
+}
+
+
+.subject {
+    float: left;
+    margin-left:100px;
+    margin-top: 5px;
+}
+
+.header-m {
+    display:inline-block;
+}
+
+.message-data {
+    text-align:left;
+    margin-top: 50px;
+    float: left;
+    height: 100% !important;
+    width: 100%;
+    margin-left: 30px;
+}
+
+.delete {
+    float: right;
+    margin-top: 20px;
+    margin-right: -180px;
+}
+.delete-icon {
+    font-size: 40px !important;
+    color: red;
+    cursor: pointer;
+}
